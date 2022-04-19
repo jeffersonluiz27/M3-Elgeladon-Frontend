@@ -1,5 +1,4 @@
-# M3-Proj1-Elgeladon-Frontend
-## Projeto Catalogo de paletas
-- Estilizado com css3
+# Projeto Catalogo de paletas
+- Estilizado com CSS3
 - Flexbox
 - Responsividade
