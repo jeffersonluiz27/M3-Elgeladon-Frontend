@@ -189,7 +189,7 @@ div.paletaItem__preco{
   margin-right: -60px;
 }
 
-.modal-overlay1, .modal-overlay2{
+.modal-overlay,.modal-overlay1{
   background-color: #00000050;
   width: 100vw;
   height: 100vh;
@@ -385,4 +385,28 @@ div.paletaItem__preco{
 .btn_delete_yes:hover{
   background-color: #00b309;
   color: #fff;
+}
+
+.modal-alert{
+  background-color: #00000050;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  justify-content: end;
+  align-items: start;
+  overflow-y: auto;
+  display: none;
+}
+
+.modal-message {
+  margin: 1rem;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: .8rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }

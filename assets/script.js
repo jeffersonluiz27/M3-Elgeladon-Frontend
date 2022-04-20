@@ -62,12 +62,6 @@ const findPaletaById = async () => {
               <div class="paletaItem__sabor">${paleta.sabor}</div>
               <div class="paletaItem__preco">R$ ${paleta.preco}</div>
               <div class="paletaItem__descricao">${paleta.descricao}</div>
-              <div class="paletaItem__acoes">
-                <div class="acoes">
-                  <button class="acoes__editar btn" onclick="abrirModal(${paleta.id})">Editar</button> 
-                  <button class="acoes__apagar btn" onclick="abrirModalDelete(${paleta.id})">Apagar</button> 
-                </div>
-              </div>
             </div>
               <img class="paletaItem__img" src=${
                 paleta.foto
@@ -80,7 +74,14 @@ const findPaletaById = async () => {
 };
 
 function fecharModal() {
+  document.querySelector(".modal-overlay").style.display = "none";
   document.querySelector(".modal-overlay1").style.display = "none";
+  document.querySelector("#overlay-delete").style.display = "none";
+  document.querySelector("#modal-alert").style.display = "none";
+  document.querySelector("#sabor").value = "";
+  document.querySelector("#preco").value = 0;
+  document.querySelector("#descricao").value = "";
+  document.querySelector("#foto").value = "";
 }
 
 async function abrirModal(id = null) {
@@ -103,15 +104,7 @@ async function abrirModal(id = null) {
     document.querySelector("#title-modal").innerText = "Cadastrar uma paleta";
     document.querySelector("#button-modal").innerText = "Cadastrar";
   }
-  document.querySelector(".modal-overlay2").style.display = "flex";
-}
-
-function fecharModalCadastro() {
-  document.querySelector(".modal-overlay2").style.display = "none";
-  document.querySelector("#sabor").value = "";
-  document.querySelector("#preco").value = 0;
-  document.querySelector("#descricao").value = "";
-  document.querySelector("#foto").value = "";
+  document.querySelector(".modal-overlay").style.display = "flex";
 }
 
 async function createPaleta() {
@@ -168,7 +161,22 @@ async function createPaleta() {
     document.querySelector("#contentList").insertAdjacentHTML("beforeend", html);
   }
 
-  fecharModalCadastro();
+  fecharModal();
+ /*  window.location.reload(); */
+  mensagem();
+}
+
+function mensagem(message){
+  const modal = document.querySelector(".modal-alert");
+
+  setTimeout(() => {
+    modal.style.display = "none";
+    location.reload();
+  }, 5000);
+
+  document.querySelector("#modal-alert").style.display = "flex";
+
+  document.getElementById("message").innerHTML = message;
 }
 
 function abrirModalDelete(id) {
@@ -181,10 +189,6 @@ function abrirModalDelete(id) {
   })
 }
 
-function fecharModalDelete() {
-  document.querySelector("#overlay-delete").style.display = "none";
-}
-
 const deletePaleta = async (id) => {
   const response = await fetch(`${baseUrl}/delete/${id}`, {
     method: "delete",
@@ -194,9 +198,9 @@ const deletePaleta = async (id) => {
     mode: "cors",
   });
   const result = await response.json();
-  alert(result.message);
+  /* alert(result.message); */
   document.getElementById("contentList").innerHTML = "";
-  fecharModalDelete();
+  fecharModal();
   window.location.reload();
   findAllPaletas();
 };

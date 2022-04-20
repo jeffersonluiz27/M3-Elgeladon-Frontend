@@ -34,13 +34,13 @@
       <button type="button" class="default-button" onclick="abrirModal()">Cadastrar Paleta</button>
     </section>
     
-    <section class="modal-overlay2" id="overlay2">
+    <section class="modal-overlay" id="overlay2">
     
       <div class="modal">
     
         <div class="modal-header" id="modal-header">
           <h2 id="title-modal">Cadastrar uma paleta</h2>
-          <a onclick="fecharModalCadastro()" class="close-modal">x</a>
+          <a onclick="fecharModal()" class="close-modal">x</a>
         </div>
     
         <div class="modal-body">
@@ -63,16 +63,16 @@
 
   </section>
 
-  <section class="modal-overlay2" id="overlay-delete">
+  <section class="modal-overlay" id="overlay-delete">
     <div class="modal">
       <div class="modal-header">
         <h2 id="title-header-modal">Confirmação de deleção</h2>
-        <a onclick="fecharModalDelete()" class="close-modal">x</a>
+        <a onclick="fecharModal()" class="close-modal">x</a>
       </div>
       <div class="modal-body-delete">
         <p>Deseja realmente apagar essa paleta?</p>
         <div class="btns_delete">
-          <button class="btn_delete_no btn_delete" onclick="fecharModalDelete()">Não</button>
+          <button class="btn_delete_no btn_delete" onclick="fecharModal()">Não</button>
           <button class="btn_delete_yes btn_delete">Sim</button>
         </div>
       </div>
@@ -90,9 +90,18 @@
   
       <div class="modal-body">
         <div id="paletaEscolhida"></div>
-        </div>
-        </div>
+      </div>
+      </div>
 
+  </section>
+
+  <section class="modal-alert" id="modal-alert">
+    <div class="modal-message">
+      <div class="modal-header">
+        <h2 id="message"></h2>
+        <a onclick="fecharModal()" class="close-modal">x</a>
+      </div>
+    </div>
   </section>
 
   <script src="./assets/script.js"></script>
