@@ -163,7 +163,7 @@ async function createPaleta() {
 
   fecharModal();
  /*  window.location.reload(); */
-  mensagem();
+  mensagem(novaPaleta.message);
 }
 
 function mensagem(message){
@@ -201,6 +201,7 @@ const deletePaleta = async (id) => {
   /* alert(result.message); */
   document.getElementById("contentList").innerHTML = "";
   fecharModal();
-  window.location.reload();
+  mensagem(result.message);
+  /* window.location.reload(); */
   findAllPaletas();
 };
