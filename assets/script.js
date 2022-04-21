@@ -5,6 +5,9 @@ async function findAllPaletas() {
 
   const paletas = await response.json();
 
+  if(paletas.types == 'erro'){
+    mensagem(paletas.message,'erro')
+  }
 
   paletas.forEach((paleta) => {
     document.getElementById("contentList").insertAdjacentHTML(
@@ -27,7 +30,6 @@ async function findAllPaletas() {
             
       </div>`
     );
-    console.log({paleta})
   });
 };
 
@@ -38,39 +40,36 @@ const findPaletaById = async () => {
   const id = document.getElementById("idPaleta").value;
 
   if(id <= 0){
-    alert('Digite um numero maior que 0!');
+    mensagem('Digite um numero válido!','erro');
+  }
+  document.querySelector(".modal-overlay1").style.display = "flex";
+
+  const response = await fetch(`${baseUrl}/find-paleta/${id}`);
+
+  const paleta = await response.json();
+
+  if(paleta.id == undefined){
+    const paletaEscolhidaDiv = document.getElementById("paletaEscolhida");
+    paletaEscolhidaDiv.innerHTML = `<div class="paletaItem">
+    <div>
+        <div class="paletaItem__sabor">Paleta não encontrada</div>
+    </div>`
+    mensagem('Digite um numero válido!','erro');
   }else{
+    const paletaEscolhidaDiv = document.getElementById("paletaEscolhida");
 
-      document.querySelector(".modal-overlay1").style.display = "flex";
-
-      const response = await fetch(`${baseUrl}/find-paleta/${id}`);
-
-      const paleta = await response.json();
-
-      if(paleta.id == undefined){
-        const paletaEscolhidaDiv = document.getElementById("paletaEscolhida");
-        paletaEscolhidaDiv.innerHTML = `<div class="paletaItem">
-        <div>
-            <div class="paletaItem__sabor">Paleta não encontrada</div>
-        </div>`
-      }else{
-        const paletaEscolhidaDiv = document.getElementById("paletaEscolhida");
-
-        paletaEscolhidaDiv.innerHTML = `
-        <div class="paletaItem" id="paletaItem_${paleta.id}">
-          <div>
-              <div class="paletaItem__sabor">${paleta.sabor}</div>
-              <div class="paletaItem__preco">R$ ${paleta.preco}</div>
-              <div class="paletaItem__descricao">${paleta.descricao}</div>
-            </div>
-              <img class="paletaItem__img" src=${
-                paleta.foto
-              } alt=${`Paleta de ${paleta.sabor}`} />
-        </div>`;
-      }
-
-      
-    }
+    paletaEscolhidaDiv.innerHTML = `
+    <div class="paletaItem" id="paletaItem_${paleta.id}">
+      <div>
+          <div class="paletaItem__sabor">${paleta.sabor}</div>
+          <div class="paletaItem__preco">R$ ${paleta.preco}</div>
+          <div class="paletaItem__descricao">${paleta.descricao}</div>
+        </div>
+          <img class="paletaItem__img" src=${
+            paleta.foto
+          } alt=${`Paleta de ${paleta.sabor}`} />
+    </div>`;
+  }
 };
 
 function fecharModal() {
@@ -156,27 +155,32 @@ async function createPaleta() {
 
   if(modoEdicao){
     document.querySelector(`#paletaItem_${paleta.id}`).outerHTML = html;
-
   }else{
     document.querySelector("#contentList").insertAdjacentHTML("beforeend", html);
   }
 
   fecharModal();
- /*  window.location.reload(); */
-  mensagem(novaPaleta.message);
+  location.reload();
+  mensagem(novaPaleta.message,'');
 }
 
-function mensagem(message){
+function mensagem(message, types){
   const modal = document.querySelector(".modal-alert");
 
   setTimeout(() => {
     modal.style.display = "none";
     location.reload();
-  }, 5000);
+  }, 3000);
 
   document.querySelector("#modal-alert").style.display = "flex";
-
   document.getElementById("message").innerHTML = message;
+  if(types=='alert'){
+    document.querySelector(".modal-message").style.backgroundColor = "#ff9700";
+  }else if(types=='erro'){
+    document.querySelector(".modal-message").style.backgroundColor = "#fc676d";
+  }else{
+    document.querySelector(".modal-message").style.backgroundColor = "#6ffb74";
+  }
 }
 
 function abrirModalDelete(id) {
@@ -198,10 +202,9 @@ const deletePaleta = async (id) => {
     mode: "cors",
   });
   const result = await response.json();
-  /* alert(result.message); */
   document.getElementById("contentList").innerHTML = "";
   fecharModal();
-  mensagem(result.message);
+  mensagem(result.message,'');
   /* window.location.reload(); */
   findAllPaletas();
 };

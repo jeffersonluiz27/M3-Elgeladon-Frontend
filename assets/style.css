@@ -79,13 +79,13 @@ html {
   width: 3rem;
   height: 2.2rem;
   cursor: pointer;
+  transform: scale(1);
   transition: all 0.3s ease-in-out;
   font-size: 1rem;
 }
 
 #idPaletaButton:hover {
-  background-color: #706f6f;
-  color: #ffffff;
+  transform: scale(.9);
 }
 
 .default-button{
@@ -387,8 +387,13 @@ div.paletaItem__preco{
   color: #fff;
 }
 
+.close-modal-alert{
+  text-decoration: none;
+  color: #000000;
+  cursor: pointer;
+}
+
 .modal-alert{
-  background-color: #00000050;
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -409,4 +414,12 @@ div.paletaItem__preco{
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  align-items: center;
+  background-color:#6ffb74;
+  background-image: none;
+  padding: 1rem;
+}
+
+.modal-message:hover{
+  filter: brightness(90%);
 }
