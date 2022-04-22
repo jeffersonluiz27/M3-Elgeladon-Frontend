@@ -19,18 +19,25 @@ html {
     rgba(0,212,255,0.5)
   );
   min-height: calc(100vh - 60px);
-  margin: .9em;
-  padding: .9em;
+  margin: .8em;
+  padding: .8em;
   color:black;
-  border-radius: 1.1rem;
+  border-radius: 1rem;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
 }
+
+/* #img_titulo{
+  margin-left: -15rem;
+  margin-right: 10rem;
+} */
 
 .main div{
   display: flex;
   justify-content: center;
   color: black;
 }
+
+
 
 .topbar{
   display: flex;
@@ -39,32 +46,50 @@ html {
   justify-content: center;
 }
 
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .5rem;
+}
+
 #titulo {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color:#85d7f3;
-  width: 15rem;
-  height: 2rem;
+  width: 70rem;
+  height: 3rem;
   border-radius: 1.2rem;
-  align-self: center;
-  justify-self: center;
+  
+}
+
+#titulo h1{
+  font-size: 2rem;
+}
+
+.sacola{
+  cursor: pointer;
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
+}
+
+.sacola:hover{
+ transform: scale(1.1);
 }
 
 .buscar__paleta{
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  padding: .5rem;
 }
 
 #idPaleta {
   padding: 0.5rem;
-  width: 80%;
   border: none;
   border-radius: 0.2rem;
-  
 }
 
 #idPaletaButton {
@@ -100,6 +125,7 @@ html {
   background-color: transparent;
   color:#2d00f7;
   transition: all 0.3s ease-in-out;
+  margin-bottom: 1rem;
 }
 
 .default-button:hover{
@@ -122,12 +148,13 @@ html {
 .content{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 3rem 3rem;
+  grid-gap: .7rem 3rem;
 }
 
 #contentList{
   display: flex;
   flex-wrap: wrap;
+  margin-left: 1rem;
 }
 
 @media (max-width: 1220px){
@@ -153,7 +180,7 @@ html {
 }
 
 .paletaItem{
-  margin: 20px 0;
+  margin: .7rem 0;
   
 }
 
@@ -218,7 +245,7 @@ div.paletaItem__preco{
 
 .modal-header, #modal-header{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background-image: radial-gradient(
     farthest-corner at 40px 40px,
@@ -284,15 +311,21 @@ div.paletaItem__preco{
 
 .button-modal-create{
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  margin-top: .8rem;
 }
 
+.modal-button-area{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
 
 .paletaItem__acoes{
   display: flex;
   justify-content: space-around;
   flex-direction: row;
-  width: 15rem;
+  width: 100%;
   margin-top: 1rem;
 }
 
@@ -305,7 +338,6 @@ div.paletaItem__preco{
   text-transform: uppercase;
   cursor: pointer;
   width: 5rem;
-  
   transition: all 0.3s ease-in-out;
 }
 

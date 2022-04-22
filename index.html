@@ -13,15 +13,17 @@
 </head>
 
 <body>
+  
   <section class="main">
-    
-    <div class="topbar">
+    <section class="title">
       <div id="titulo">
-        <img
-          src="./assets/images/logo-el-geladon.png"
-          width="50" alt="">
+        <img src="./assets/images/logo-el-geladon.png" width="60" alt="" id="img_titulo">
         <h1>El Geladon</h1>
+        <img src="./assets/images/Sacola-ico.png" alt="" class="sacola" width="35">
       </div>
+      </section>
+      
+      <div class="topbar">
       <div class="buscar__paleta">
         <div id="buscar_paleta">
           <input type="number" id="idPaleta" placeholder="Digite o ID da paleta">
@@ -35,12 +37,9 @@
     </section>
     
     <section class="modal-overlay" id="overlay2">
-    
       <div class="modal">
-    
         <div class="modal-header" id="modal-header">
           <h2 id="title-modal">Cadastrar uma paleta</h2>
-          <a onclick="fecharModal()" class="close-modal">x</a>
         </div>
     
         <div class="modal-body">
@@ -50,7 +49,10 @@
             <input type="number" name="preco" id="preco" placeholder="Preço da Paleta">
             <textarea type="text" name="descricao" id="descricao" placeholder="Descrição da Paleta" rows="5"></textarea>
             <input type="text" name="foto" id="foto" placeholder="Link da Foto da Paleta">
-            <button id="button-modal" onclick="createPaleta()">Cadastrar</button>
+            <div class="modal-button-area">
+              <button id="close-modal" onclick="fecharModal()">Cancelar</button>
+              <button id="button-modal" onclick="createPaleta()">Cadastrar</button>
+            </div>
           </div>
         </div>
       </div>
@@ -80,9 +82,7 @@
   </section>
 
   <section class="modal-overlay1" id="overlay1">
-  
     <div class="modal">
-  
       <div class="modal-header">
         <h2>Paleta Escolhida</h2>
         <a onclick="fecharModal()" class="close-modal">x</a>
@@ -91,7 +91,7 @@
       <div class="modal-body">
         <div id="paletaEscolhida"></div>
       </div>
-      </div>
+    </div>
 
   </section>
 
