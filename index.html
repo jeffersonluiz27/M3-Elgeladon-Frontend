@@ -26,14 +26,18 @@
       <div class="topbar">
       <div class="buscar__paleta">
         <div id="buscar_paleta">
-          <input type="number" id="idPaleta" placeholder="Digite o ID da paleta">
+          <input type="text" id="idPaleta" placeholder="Digite o ID da paleta">
           <button id="idPaletaButton" onclick="findPaletaById()">
           </button>
         </div>
       </div>
     </div>
-    <section class="button-modal-create">
-      <button type="button" class="default-button" onclick="abrirModal()">Cadastrar Paleta</button>
+    <section class="options">
+      <span class="msg-alert"></span>
+      <div class="btns-list-cad">
+        <a href="/" class="default-button list-all">Listar todas as paletas</a>
+        <button type="button" class="default-button" onclick="abrirModal()">Cadastrar Paleta</button>
+      </div>
     </section>
     
     <section class="modal-overlay" id="overlay2">
@@ -63,6 +67,9 @@
         </div>
     </div>
 
+    <div id="paletaEscolhida">
+    </div>
+
   </section>
 
   <section class="modal-overlay" id="overlay-delete">
@@ -79,28 +86,6 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <section class="modal-overlay1" id="overlay1">
-    <div class="modal">
-      <div class="modal-header">
-        <h2>Paleta Escolhida</h2>
-        <a onclick="fecharModal()" class="close-modal">x</a>
-      </div>
-  
-      <div class="modal-body">
-        <div id="paletaEscolhida"></div>
-      </div>
-    </div>
-
-  </section>
-
-  <section class="modal-alert" id="modal-alert">
-    <a onclick="fecharModal()" class="close-modal-alert">
-      <div class="modal-message">
-        <p id="message"></p>
-      </div>
-    </a>
   </section>
 
   <script src="./assets/script.js"></script>

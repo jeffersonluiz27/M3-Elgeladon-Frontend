@@ -419,39 +419,43 @@ div.paletaItem__preco{
   color: #fff;
 }
 
-.close-modal-alert{
-  text-decoration: none;
-  color: #000000;
-  cursor: pointer;
-}
-
-.modal-alert{
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  justify-content: end;
-  align-items: start;
-  overflow-y: auto;
-  display: none;
-}
-
-.modal-message {
-  margin: 1rem;
-  max-width: 600px;
-  background-color: #fff;
-  border-radius: .8rem;
+.options {
   display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  justify-content: space-between;
   align-items: center;
-  background-color:#6ffb74;
-  background-image: none;
-  padding: 1rem;
+  margin: 0 auto 25px auto;
+  max-width: 1110px;
 }
 
-.modal-message:hover{
-  filter: brightness(90%);
+.msg-alert {
+  text-align: center;
+  z-index: 999999;
+  font-weight: 600;
+}
+
+.success {
+  background-color: #a4ffa4;
+  color: #006905;
+  border: solid 1px #006905;
+  padding: 0.8rem;
+  border-radius: 0.3rem;
+}
+
+.danger {
+  background-color: #ffa4a4;
+  color: #690000;
+  border: solid 1px #690000;
+  padding: 0.8rem;
+  border-radius: 0.3rem;
+}
+
+.btns-list-cad {
+  display: flex;
+}
+
+.list-all {
+  text-decoration: none;
+  text-align: center;
+  display: none;
+  margin-right: 1rem;
 }
