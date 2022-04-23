@@ -32,12 +32,12 @@ async function findAllPaletas() {
             <div class="paletaItem__descricao">${paleta.descricao}</div>
             <div class="paletaItem__acoes">
               <div class="acoes">
-                <button class="acoes__editar btn" onclick="abrirModal(${
+                <button class="acoes__editar btn" onclick="abrirModal('${
 									paleta._id
-								})">Editar</button> 
-                <button class="acoes__apagar btn" onclick="abrirModalDelete(${
+								}')">Editar</button> 
+                <button class="acoes__apagar btn" onclick="abrirModalDelete('${
 									paleta._id
-								})">Apagar</button> 
+								}')">Apagar</button> 
               </div>
             </div>
         </div>
@@ -75,10 +75,11 @@ const findPaletaById = async () => {
 
 	document.querySelector('.list-all').style.display = 'block';
 	document.querySelector('#contentList').style.display = 'none';
+	document.querySelector('#cadastrar-button').style.display = 'none';
 	const paletaEscolhidaDiv = document.getElementById('paletaEscolhida');
 
 	paletaEscolhidaDiv.innerHTML = `
-    <div class="paletaItem" id="paletaItem_${paleta.id}">
+    <div class="paletaItem" id="paletaItem_${paleta._id}">
       <div>
           <div class="paletaItem__sabor">${paleta.sabor}</div>
           <div class="paletaItem__preco">R$ ${paleta.preco}</div>
@@ -92,7 +93,6 @@ const findPaletaById = async () => {
 
 function fecharModal() {
 	document.querySelector('.modal-overlay').style.display = 'none';
-	document.querySelector('.modal-overlay1').style.display = 'none';
 	document.querySelector('#overlay-delete').style.display = 'none';
 	document.querySelector('#sabor').value = '';
 	document.querySelector('#preco').value = 0;
@@ -103,14 +103,13 @@ function fecharModal() {
 async function abrirModal(id = null) {
 	if (id != null) {
 		document.querySelector('#title-modal').innerText = 'Editar uma paleta';
-
 		document.querySelector('#button-modal').innerText = 'Atualizar';
 
 		const response = await fetch(`${baseUrl}/one-paleta/${id}`);
 
 		const paleta = await response.json();
 
-		document.querySelector('#id').value = paleta.id;
+		document.querySelector('#id').value = paleta._id;
 		document.querySelector('#sabor').value = paleta.sabor;
 		document.querySelector('#preco').value = paleta.preco;
 		document.querySelector('#descricao').value = paleta.descricao;
@@ -137,7 +136,7 @@ async function createPaleta() {
 		foto,
 	};
 
-	const modoEdicao = id > 0;
+	const modoEdicao = id != '';
 
 	const endpoint =
 		baseUrl + (modoEdicao ? `/update-paleta/${id}` : '/create-paleta');
@@ -153,32 +152,23 @@ async function createPaleta() {
 
 	const novaPaleta = await response.json();
 
-	const html = `
-  <div class="paletaItem" id="paletaItem_${paleta._id}">
-    <div>
-        <div class="paletaItem__sabor">${novaPaleta.sabor}</div>
-        <div class="paletaItem__preco">R$ ${novaPaleta.preco}</div>
-        <div class="paletaItem__descricao">${novaPaleta.descricao}</div>
-        <div class="paletaItem__acoes">
-              <div class="acoes">
-                <button class="acoes__editar btn" onclick="abrirModal(${paleta._id})">Editar</button> 
-                <button class="acoes__apagar btn" onclick="abrirModalDelete(${paleta._id})">Apagar</button> 
-              </div>
-            </div>
-    </div>
-    <img class="paletaItem__img" src="${novaPaleta.foto}" alt="Paleta de ${novaPaleta.sabor}" />
-  </div>`;
-
-	if (modoEdicao) {
-		document.querySelector(`#paletaItem_${paleta._id}`).outerHTML = html;
-	} else {
-		document
-			.querySelector('#contentList')
-			.insertAdjacentHTML('beforeend', html);
+	if (novaPaleta.message == undefined) {
+		localStorage.setItem('message', novaPaleta.message);
+		localStorage.setItem('type', 'danger');
+		showMessageAlert();
+		return;
 	}
 
+	if (modoEdicao) {
+		localStorage.setItem('message', 'Paleta atualizada com sucesso');
+		localStorage.setItem('type', 'success');
+	} else {
+		localStorage.setItem('message', 'Paleta criada com sucesso');
+		localStorage.setItem('type', 'success');
+	}
+
+	document.location.reload(true);
 	fecharModal();
-	location.reload();
 }
 
 function abrirModalDelete(id) {
@@ -200,7 +190,11 @@ const deletePaleta = async (id) => {
 		mode: 'cors',
 	});
 	const result = await response.json();
-	document.getElementById('contentList').innerHTML = '';
+
+	localStorage.setItem('message', result.message);
+	localStorage.setItem('type', 'success');
+
+	document.location.reload(true);
+
 	fecharModal();
-	findAllPaletas();
 };
