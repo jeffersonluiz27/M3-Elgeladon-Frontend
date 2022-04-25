@@ -194,6 +194,9 @@ html {
 .paletaItem div{
   display: flex;
   justify-content: space-between;
+}
+
+.paletaItem-body{
   flex-direction: column;
 }
 
@@ -274,9 +277,13 @@ div.paletaItem__preco{
 
 .modal-body div {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+#modal-body{
+  flex-direction: column;
+  width: 100%;
 }
 
 .modal-body div input, textarea{
@@ -298,6 +305,8 @@ div.paletaItem__preco{
   border-radius: .3rem;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  margin-right: 2rem;
+  margin-top: 1rem;
 }
 
 .modal-body div button:hover{
@@ -305,8 +314,14 @@ div.paletaItem__preco{
   color: #fff;
 }
 
-#modal-body{
-  width: 100%;
+#button-modal{
+  color: #0e6602;
+  border: solid 1px #0e6602;
+}
+
+#button-modal:hover{
+  background-color: #0e6602;
+  color: #fff;
 }
 
 .button-modal-create{
@@ -319,14 +334,16 @@ div.paletaItem__preco{
   display: flex;
   flex-direction: row;
   width: 100%;
+  justify-content: space-evenly;
 }
 
 .paletaItem__acoes{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-direction: row;
   width: 100%;
   margin-top: 1rem;
+  flex-wrap: wrap;
 }
 
 .btn{
@@ -344,6 +361,8 @@ div.paletaItem__preco{
 .acoes{
   display: flex;
   flex-direction: row;
+  margin-left: 3rem;
+  width: 70%;
   flex-wrap: wrap;
 }
 
@@ -364,6 +383,7 @@ div.paletaItem__preco{
   color:#ff0000;
   border: solid 1px #ff0000;
   background-color: transparent;
+  margin-bottom: .3rem;
 }
 
 .acoes__apagar:hover{

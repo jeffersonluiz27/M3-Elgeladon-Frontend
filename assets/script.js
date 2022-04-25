@@ -26,7 +26,7 @@ async function findAllPaletas() {
 		document.getElementById('contentList').insertAdjacentHTML(
 			'beforeend',
 			`<div class="paletaItem" id="paletaItem_${paleta._id}">
-        <div>
+        <div class="paletaItem-body">
             <div class="paletaItem__sabor">${paleta.sabor}</div>
             <div class="paletaItem__preco">R$ ${paleta.preco}</div>
             <div class="paletaItem__descricao">${paleta.descricao}</div>
