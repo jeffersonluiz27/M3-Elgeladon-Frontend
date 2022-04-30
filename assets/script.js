@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000/paletas";
+const baseUrl = 'https://api-el-geladon-m3.onrender.com/paletas';
 const msgAlert = document.querySelector('.msg-alert');
 
 function closeMessageAlert() {
